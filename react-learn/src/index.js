@@ -1,33 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import MyFuncComp from './MyFuncComp';
-import MyClassComp from './MyClassComp'
+import AllStudents from './AllStudents';
 
-// function MyFuncComp() {
-//     return <h1>函数组件的内容</h1>
-// }
-// function myFuncComp() {
-//     return <h1>函数组件的内容</h1>
-// }
+const appkey = "zzyu_1564402433694";
 
-// const comp = <MyFuncComp title="abc/>; // 使用组件，生成的仍然是一个react元素
-// const comp = <myFuncComp/>;
-// console.log(comp);
+/**
+ * 获取所有学生数据
+ */
+async function fetchAllStudents() {
+    const data =  await fetch("http://api.duyiedu.com/api/student/findAll?appkey=" + appkey)
+        .then(resp => resp.json()).then(resp => resp.data);
+    // console.log(data);
+    return data;
+}
 
-const div = <div title="abc"></div>
-console.log(div);
+async function render() {
+    ReactDOM.render("正在加载中....", document.getElementById('root'));
+    const stu = await fetchAllStudents(); // 获取学生数组
+    ReactDOM.render(<AllStudents stu={stu} />, document.getElementById('root'));
+}
 
-ReactDOM.render(<div>
-    {/* {MyFuncComp()} */}
-    {/* <MyFuncComp/> */}
-    {/* {comp} */}
-    <MyFuncComp number="aaa" enable />
-    <MyFuncComp number={123} enable={true} />
-    <MyFuncComp />
-    <MyClassComp obj={{
-        name: 'abc',
-        age: 18
-    }} />
-    <MyClassComp number={123} ui={<h2>这是我传递的属性</h2>} />
-    <MyClassComp number={123} />
-</div>, document.getElementById('root'));
+render();
