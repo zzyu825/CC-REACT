@@ -1,48 +1,33 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import src1 from './assets/1.jpg';
-import src2 from './assets/2.jpg';
-import src3 from './assets/3.jpg';
-import './index.css';
+import MyFuncComp from './MyFuncComp';
+import MyClassComp from './MyClassComp'
 
-let index = 0; // 显示图片的索引
-const srcs = [src1, src2, src3]; // 保存图片路径的数组
-const root = document.getElementById('root');
-let timer; // 计时器
+// function MyFuncComp() {
+//     return <h1>函数组件的内容</h1>
+// }
+// function myFuncComp() {
+//     return <h1>函数组件的内容</h1>
+// }
 
-/**
- * 根据index的值，渲染图片
- */
-function render() {
-    ReactDOM.render(<img src={srcs[index]} />, root);
-}
+// const comp = <MyFuncComp title="abc/>; // 使用组件，生成的仍然是一个react元素
+// const comp = <myFuncComp/>;
+// console.log(comp);
 
-/**
- * 启动计时器，每隔一段时间切换图片
- */
-function start() {
-    clearInterval(timer);
-    timer = setInterval(() => {
-        index = (index + 1) % 3;
-        render();
-    }, 2000)
-}
+const div = <div title="abc"></div>
+console.log(div);
 
-/**
- * 停止计时器
- */
-function stop() {
-    clearInterval(timer);
-}
-
-render();
-
-start();
-
-root.onmouseenter = () => {
-    stop();
-}
-
-root.onmouseleave = () => {
-    start();
-}
+ReactDOM.render(<div>
+    {/* {MyFuncComp()} */}
+    {/* <MyFuncComp/> */}
+    {/* {comp} */}
+    <MyFuncComp number="aaa" enable />
+    <MyFuncComp number={123} enable={true} />
+    <MyFuncComp />
+    <MyClassComp obj={{
+        name: 'abc',
+        age: 18
+    }} />
+    <MyClassComp number={123} ui={<h2>这是我传递的属性</h2>} />
+    <MyClassComp number={123} />
+</div>, document.getElementById('root'));
