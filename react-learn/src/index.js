@@ -1,23 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import AllStudents from './AllStudents';
+// import Tick from './components/Tick';
+import Test from './components/Test';
 
-const appkey = "zzyu_1564402433694";
-
+// let num = 10,
+//     timer = null;
 /**
- * 获取所有学生数据
+ * 倒计时函数
  */
-async function fetchAllStudents() {
-    const data =  await fetch("http://api.duyiedu.com/api/student/findAll?appkey=" + appkey)
-        .then(resp => resp.json()).then(resp => resp.data);
-    // console.log(data);
-    return data;
-}
+// function tick() {
+//     timer = setInterval(() => {
+//         num--;
+//         if (num <= 0) {
+//             clearInterval(timer);
+//         }
+//         ReactDOM.render(<Tick number={num} />, document.getElementById('root'));
+//     }, 1000);
+// }
 
-async function render() {
-    ReactDOM.render("正在加载中....", document.getElementById('root'));
-    const stu = await fetchAllStudents(); // 获取学生数组
-    ReactDOM.render(<AllStudents stu={stu} />, document.getElementById('root'));
-}
+// tick();
 
-render();
+// ReactDOM.render(<Tick number={10} />, document.getElementById('root'));
+ReactDOM.render(<Test />, document.getElementById('root'));
