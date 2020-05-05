@@ -1,7 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Ball from './components/Ball';
-import BallList from './components/BallList';
+// import Tick from './components/Tick';
+import TickControl from './components/TickControl';
 
-// ReactDOM.render(<Ball xSpeed={300} ySpeed={200} left={100} top={100} bg={"#ff0"}/>, document.getElementById('root'));
-ReactDOM.render(<BallList />, document.getElementById('root'));
+// function handelClick(e) {
+//     console.log('点击了', e);
+// }
+
+// const btn = <button 
+//                 onClick={handelClick}
+//                 onMouseEnter={e => {
+//                     console.log('移入了', e)
+//                 }}
+//             >按钮</button>;
+
+// ReactDOM.render(btn, document.getElementById('root'));
+
+// ReactDOM.render(<Tick number={10} />, document.getElementById('root'));
+
+const obj = new TickControl();
+console.log(obj);
+
+ReactDOM.render(<TickControl/>, document.getElementById('root'));
