@@ -1,24 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import Tick from './components/Tick';
-import TickControl from './components/TickControl';
+// import Pager from './components/Pager';
+import PagerContainer from './components/PagerContainer';
 
-// function handelClick(e) {
-//     console.log('点击了', e);
+// const test = {
+//     current: 3,
+//     total: 100,
+//     limit: 9
 // }
 
-// const btn = <button 
-//                 onClick={handelClick}
-//                 onMouseEnter={e => {
-//                     console.log('移入了', e)
-//                 }}
-//             >按钮</button>;
+// ReactDOM.render(<Pager {...test}/>, document.getElementById('root'));
+ReactDOM.render(<PagerContainer />, document.getElementById('root'));
 
-// ReactDOM.render(btn, document.getElementById('root'));
-
-// ReactDOM.render(<Tick number={10} />, document.getElementById('root'));
-
-const obj = new TickControl();
-console.log(obj);
-
-ReactDOM.render(<TickControl/>, document.getElementById('root'));
