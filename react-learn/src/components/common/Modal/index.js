@@ -1,7 +1,7 @@
 import React from 'react';
 import './index.css'
 
-export default function index(props) {
+export default function Modal(props) {
     // 默认属性
     const defaultProps = {
         bg: "rgba(0,0,0,.5)"
