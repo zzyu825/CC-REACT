@@ -1,38 +1,30 @@
 import React, { Component } from 'react';
-import ValidationComp, { A } from './ValidationComp';
-import Comp from './Comp';
+import { A, B } from './components/Comps';
+import withLog from './HOC/withLog';
+import withLogin from './HOC/withLogin';
+
+// let Alog = withLog(A, 'abc');
+// Alog = withLogin(Alog);
+// let Blog = withLog(B, 'bcd');
+// Blog = withLogin(Blog);
+
+const AComp = withLogin(withLog(A, 'abc'));
+const BComp = withLogin(withLog(B, 'bcd'));
 export default class App extends Component {
 
     render() {
-        
+        // const AComp = withLogin(withLog(A, 'abc'));
+        // const BComp = withLogin(withLog(B, 'bcd'));
         return (
-            <ValidationComp 
-                a={123} 
-                b="abc" 
-                c 
-                d={"123"}
-                // d={null}
-                e={<h1>react元素</h1>}
-                f={Comp}
-                g={new A()}
-                sex="男"
-                h={[2, 3]}
-                i={{
-                    a: 2
-                }}
-                j={{
-                    a: 3,
-                    name: "abc",
-                    age: 233,
-                    address: {
-                        province: "asdfa",
-                        city: "adsfasdf"
-                    }
-                }}
-                k={[{name:"asdf", age:33}]}
-                m={23}
-                score={"33"}
-            />
+            <>
+                {/* <Alog a={1} isLogin/>
+                <Blog b={2} isLogin/> */}
+                <AComp a={1} isLogin/>
+                <BComp b={2} isLogin/>
+                <button onClick={() => {
+                    this.setState({})
+                }}>点击</button>
+            </>
         )
     }
 }
