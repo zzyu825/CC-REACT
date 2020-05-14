@@ -1,9 +1,26 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import types from '../../../utils/commonTypes';
+import PropTypes from 'prop-types';
 
 /**
  * 一组单选框
  */
 export default class RadioGroup extends Component {
+
+    /**
+     * 默认属性值
+     */
+    static defaultProps = {
+        datas: [],
+        value: ""
+    };
+
+    static propTypes = {
+        name: PropTypes.string.isRequired,
+        datas: types.groupDatas.isRequired,
+        value: PropTypes.string.isRequired,
+        onChange: PropTypes.func
+    };
 
     handelChange = e => {
         this.props.onChange && this.props.onChange(e.target.value, this.props.name, e);
