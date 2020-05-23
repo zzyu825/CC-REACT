@@ -1,9 +1,7 @@
 import React from 'react';
-// import OldContext from './OldContext'
-import NewContext from './OldContext'
+import Test from './components/common/Form/Test';
 export default class App extends React.Component {
-    
     render() {
-        return <NewContext />
+        return <Test />
     }
 }
