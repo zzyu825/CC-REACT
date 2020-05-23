@@ -1,7 +1,7 @@
 import React from 'react';
-import Test from './components/common/Form/Test';
-export default class App extends React.Component {
-    render() {
-        return <Test />
-    }
+import Test from './components/Test';
+
+export default function App() {
+    console.log('App Render');
+    return <Test />
 }
