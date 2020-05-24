@@ -1,51 +1,32 @@
-import React, { Component } from 'react';
-import TaskList from './TaskList';
-import AddTask from './AddTask';
+import withMouseListener from "./withMouseListener";
+import React from 'react'
 
-export default class Test extends Component {
+function Point(props) {
+    return <>横坐标：{props.x}，纵坐标：{props.y}</>
+}
 
-    state = {
-        tasks: []
-    }
+function MoveDiv(props) {
+    return (
+        <div style={{
+            width: 100,
+            height: 100,
+            background: "#008c8c",
+            position: "absolute",
+            left: props.x - 50,
+            top: props.y - 50
+        }}>
 
-    componentDidMount() {
-        const ts = [];
-        for (let i = 1; i <= 10; i++) {
-            ts.push({
-                taskName: `任务${i}`,
-                isFinish: Math.random() > 0.5
-            })
-        }
-        this.setState({
-            tasks: ts
-        })
-    }
-    
-    handelAdd = newTask => {
-        this.setState({
-            tasks: [
-                ...this.state.tasks,
-                newTask
-            ]
-        })
-        // this.state.tasks.push(newTask)
-    }
+        </div>);
+}
 
-    render() {
-        console.log("TaskContainer Render，数组长度：", this.state.tasks.length)
-        return (
-            <div>
-                {/* <AddTask onAdd={task => {
-                    this.setState({
-                        tasks: [
-                            ...this.state.tasks,
-                            task
-                        ]
-                    })
-                }} /> */}
-                <AddTask onAdd={this.handelAdd} />
-                <TaskList tasks={this.state.tasks} />
-            </div>
-        )
-    }
+const MousePoint = withMouseListener(Point);
+const MouseDiv = withMouseListener(MoveDiv);
+
+export default function Test() {
+    return (
+        <div>
+            <MousePoint/>
+            <MouseDiv/>
+        </div>
+    )
 }
