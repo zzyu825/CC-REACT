@@ -1,46 +1,43 @@
 import React from 'react';
-import ErrorBound from './components/common/ErrorBound'
 
-function Comp1() {
-    return <div style={{
-        width: "90%",
-        height: 500,
-        border: "2px solid"
-    }}>
-        <h1>Comp1</h1>
-        <Comp2 />
-    </div>
-}
-
-function Comp2() {
-    return <div style={{
-        width: "70%",
-        height: "70%",
-        border: "2px solid"
-    }}>
-        <h1 onClick={()=>{
-            throw new Error("点击时发生的错误")
-        }}>Comp2</h1>
-    </div>
-}
-
-function Comp3() {
-    return <div style={{
-        width: "90%",
-        height: 500,
-        border: "2px solid"
-    }}>
-        <h1>Comp3</h1>
-    </div>
-}
-
+let prev;
 export default function App() {
     return (
-        <div>
-            <ErrorBound>
-                <Comp1/>
-            </ErrorBound>
-            <Comp3/>
+        <div onClick={e => {
+            console.log("div被点击了");
+            console.log(prev === e)
+        }}>
+            <button onClick={e => {
+                console.log("react的内置dom事件：button被点击了");
+                // console.log(e.isPropagationStopped())
+                // e.stopPropagation();
+                // console.log(e)
+                // console.log(e.isPropagationStopped())
+                // console.log(e.nativeEvent)
+                // e.nativeEvent.stopImmediatePropagation();
+                prev = e;
+                // e.persist();
+                // setTimeout(() => {
+                //     console.log(e.type)
+                // }, 0)
+            }}>按钮</button>
+            <input type="text" onFocus={e => {
+                console.log("获取焦点")
+            }}/>
         </div>
     )
+}
+
+// document.querySelector("#root").onclick = e => {
+//     console.log("真实的dom元素事件：rootDiv被点击了");
+//     // e.stopPropagation();
+// }
+
+// document.addEventListener("click", e => {
+//     console.log("真实dom：document被点击了")
+// })
+
+document.querySelector("#root").onFocus = e => {
+    console.log("阻止focus事件冒泡")
+    e.stopPropagation();
 }
