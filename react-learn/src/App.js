@@ -1,56 +1,73 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
+import { getAllStudents } from "./services/student"
 
-
-class CompA extends Component {
-
-    state = {
-        n: 1
-    }
-
-    componentDidMount() {
-        console.log("CompA 新建")
-    }
-
-    componentWillUnmount() {
-        console.log("CompA 卸载")
-    }
-
-
+class StudentList extends PureComponent {
     render() {
-        return <div>
-            数字：{this.state.n} <button onClick={() => {
-                this.setState({
-                    n: this.state.n + 1
-                })
-            }}>+</button>
-        </div>
+        const stus = this.props.stuList.map(it => <Student key={it.id} {...it} />)
+        return <ul>
+            {stus}
+        </ul>
     }
 }
 
-export default class App extends Component {
-    state = {
-        isVisible: false
-    }
+class Student extends PureComponent {
     render() {
-        if (this.state.isVisible) {
-            return <div>
-                <h1>标题</h1>
-                <CompA key="compa" />
-                <button onClick={() => {
-                    this.setState({
-                        isVisible: !this.state.isVisible
-                    })
-                }}>显示/隐藏</button>
-            </div>
-        }
+        return <li>
+            {
+                this.props.sex === 1 ? (
+                    <>
+                        <i>{this.props.name}</i>
+                        <i>{this.props.birth}</i>
+                        <i>{this.props.address}</i>
+                        <i>{this.props.email}</i>
+                        <i>{this.props.phone}</i>
+                        <i>{this.props.sex}</i>
+                    </>
+                ) : (
+                        <>
+                            <span>{this.props.name}</span>
+                            <span>{this.props.birth}</span>
+                            <span>{this.props.address}</span>
+                            <span>{this.props.email}</span>
+                            <span>{this.props.phone}</span>
+                            <span>{this.props.sex}</span>
+                        </>
+                    )
+            }
+
+        </li>
+    }
+}
+
+export default class App extends PureComponent {
+
+    state = {
+        stuList: []
+    }
+
+    loadStudents = async () => {
+        const stus = await getAllStudents();
+        this.setState({
+            stuList: stus
+        });
+    }
+
+    render() {
         return (
             <div>
-                <CompA key="compa" />
+                <button onClick={this.loadStudents}>加载学生数据</button>
                 <button onClick={() => {
                     this.setState({
-                        isVisible: !this.state.isVisible
+                        stuList: []
                     })
-                }}>显示/隐藏</button>
+                }}>清空数据</button>
+                <button onClick={() => {
+                    this.setState({
+                        stuList: [...this.state.stuList.sort(() => Math.random() - 0.5)]
+                    })
+                }}>打乱顺序</button>
+                {/* 显示学生集合 */}
+                <StudentList stuList={this.state.stuList} />
             </div>
         )
     }
