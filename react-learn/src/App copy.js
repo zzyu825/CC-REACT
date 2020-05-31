@@ -1,31 +1,49 @@
-import React, { Component } from 'react'
+import React, { PureComponent, useState } from 'react'
 
-export default class App extends Component {
+// export default class App extends PureComponent {
 
-    static childContextTypes = {
+//     constructor(props) {
+//         super(props);
+//         this.state = { n: 0 }
+//     }
 
-    }
+//     render() {
+        // return (
+        //     <div>
+        //         <button onClick={() => {
+        //             this.setState({
+        //                 n: this.state.n - 1
+        //             })
+        //         }}>-</button>
+        //         <span>{ this.state.n }</span>
+        //         <button onClick={() => {
+        //             this.setState({
+        //                 n: this.state.n + 1
+        //             })
+        //         }}>+</button>
+        //     </div>
+        // )
+//     }
+// }
 
-    getChildContext(){
-        return {}
-    }
+export default function App() {
 
-    constructor(props) {
-        super(props)
-        setTimeout(() => {
-            console.log("Hello")
-        }, 3000);
-    }
+    // const arr = useState(0);
+    // const n = arr[0];
+    // const setN = arr[1];
 
-    componentWillMount() {
-        console.log("componentWillMount")
-    }
+    const [n, setN] = useState(0)
 
-    render() {
-        return (
-            <div ref="divTest">
-
-            </div>
-        )
-    }
+    return (
+        <div>
+            <button onClick={() => {
+                setN(n - 1)
+            }}>-</button>
+            <span>{ n }</span>
+            <button onClick={() => {
+                setN(n + 1)
+            }}>+</button>
+        </div>
+    )
 }
+
