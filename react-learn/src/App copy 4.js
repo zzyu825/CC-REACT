@@ -1,29 +1,32 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
-// import React, { Component } from 'react'
+function Test() {
 
-// export default class App extends Component {
-//     render() {
-//         return (
-//             <div>
-//                 <button onClick={()=>{
-//                     //不会运行shouldComponentUpdate
-//                     this.forceUpdate();//强制重新渲染
-//                 }}>强制刷新</button>
-//             </div>
-//         )
-//     }
-// }
-
+    useEffect(() => {
+        console.log("副作用函数，仅挂载时运行一次")
+        return () => {
+            console.log("清理函数，仅卸载时运行一次");
+        }
+    }, []) // 使用空数组作为依赖项，则副作用函数仅在挂载时运行
+    console.log("渲染组件");
+    const [, forceUpdate] = useState({})
+    return (<h1>
+        Test组件
+        <button onClick={() => {
+            forceUpdate({})
+        }}>刷新组件</button>
+    </h1>)
+}
 
 export default function App() {
-    console.log("App Render");
-    const [, forceUpdate] = useState({});
-    return <div>
-        <p >
-            <button onClick={() => {
-                forceUpdate({});
-            }}>强制刷新</button>
-        </p>
-    </div>
+    
+    const [visible, setvisible] = useState(true)
+    return (<div>
+        {
+            visible && <Test />
+        }
+        <button onClick={() => {
+            setvisible(!visible)
+        }}>显示/隐藏</button>
+    </div>)
 }

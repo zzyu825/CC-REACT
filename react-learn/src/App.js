@@ -1,23 +1,30 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
+let n = 1;
+
+function func1() {
+    console.log("odd 副作用函数")
+    return () => {
+        console.log("odd 清理函数")
+    }
+}
+
+function func2() {
+    console.log("even 副作用函数")
+    return () => {
+        console.log("even 清理函数")
+    }
+}
 
 export default function App() {
-    console.log("App render")
-    const [n, setN] = useState(0); //使用一个状态，该状态的默认值是0
-    return <div>
-        <button onClick={() => {
-            // setN(n - 1);
-            // setN(n - 1);
-            setN(prevN => prevN - 1); //传入的函数，在事件完成之后统一运行
-            setN(prevN => prevN - 1);
-        }}>-</button>
-        <span>{n}</span>
-        <button onClick={() => {
-            // setN(n + 1) //不会立即改变，事件运行完成之后一起改变
-            // setN(n + 1) //此时，n的值仍然是0
-
-            setN(prevN => prevN + 1); //传入的函数，在事件完成之后统一运行
-            setN(prevN => prevN + 1);
-        }}>+</button>
-    </div>
+    const [, forceUpdate] = useState({})
+    useEffect(n % 2 === 0 ? func2 : func1);
+    n++;
+    return (
+        <div>
+            <button onClick={() => {
+                forceUpdate({});
+            }}>强制刷新</button>
+        </div>
+    )
 }
