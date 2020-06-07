@@ -1,17 +1,20 @@
-import React, { useState, useLayoutEffect, useRef } from 'react'
+import React, { useState, useEffect, useDebugValue } from 'react'
+
+function useTest(){
+    const [students, ] = useState([])
+    useDebugValue("学生集合")
+    return students;
+}
 
 export default function App() {
-    const [n, setN] = useState(0)
-    const h1Ref = useRef();
-    useLayoutEffect(() => {
-        h1Ref.current.innerText = Math.random().toFixed(2);
-    })
+    useState(0)
+    useState("abc")
+    useEffect(() => {
+        console.log("effect")
+    }, [])
+    useTest();
     return (
         <div>
-            <h1 ref={h1Ref}>{n}</h1>
-            <button onClick={() => {
-                setN(n + 1)
-            }}>+</button>
         </div>
     )
 }
