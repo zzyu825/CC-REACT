@@ -1,21 +1,13 @@
-.test-enter {
+.exit-active{
+    transition: 5s;
     opacity: 0;
 }
 
-.test-enter-active {
+.enter,.appear{
+    opacity: 0;
+}
+
+.enter-active, .appear-active{
+    transition: 5s;
     opacity: 1;
-    transition: 2s;
-}
-
-.test-exit {
-    opacity: 1;
-}
-
-.test-exit-active{
-    transition: 2s;
-    opacity: 0;
-}
-
-.test-exit-done{
-    opacity: 0;
 }
