@@ -1,11 +1,19 @@
-div{
-    transition: 2000ms;
+.container {
+    width: 100px;
+    margin: 0 auto;
 }
 
-.exited, .exiting{
-    opacity: 0;
+.comp-container {
+    height: 100px;
+    position: relative;
 }
 
-.entered,.entering{
-    opacity: 1;
+.title {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.exit-done{
+    display: none;
 }
