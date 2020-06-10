@@ -3,15 +3,12 @@ import { HashRouter, BrowserRouter as Router, Route, Switch } from 'react-router
 
 // /a
 function A() {
-    return <span>组件A</span>
+    return <h1>组件A</h1>
 }
 
 // /b
 function B() {
-    return <h1>
-        组件B
-        <Route path="/b" component={A} />
-    </h1>
+    return <h1>组件B</h1>
 }
 
 // 任意路径
@@ -35,19 +32,10 @@ export default function App() {
         // <BrowserRouter></BrowserRouter>
         <Router>
             <Switch>
-                <Route path="/a" exact component={A}>
-                    {/* <h1 style={{ color: "red" }}>
-                        必定会看到的内容
-                    </h1> */}
-                    {() => {
-                        return <div>
-                            <h1 style={{ color: "red" }}>必定会看到的内容</h1>
-                            <p>adfasdfasdf</p>
-                        </div>
-                    }}
-                </Route>
-                <Route path="/b" component={B} />
                 <Route component={C} />
+                <Route path="/a" component={A} />
+                <Route path="/a/b" component={B} />
+                {/* <Route component={C} /> */}
             </Switch>
         </Router>
     )
